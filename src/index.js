@@ -1,5 +1,6 @@
 import './sass/main.scss';
-import * as basicLightbox from 'basiclightbox'
+import * as basicLightbox from 'basiclightbox';
+import '../node_modules/basiclightbox/dist/basiclightbox.min.css';
 import { error, alert } from '@pnotify/core';
 import "@pnotify/core/dist/PNotify.css";
 import "@pnotify/core/dist/BrightTheme.css"
@@ -9,19 +10,26 @@ import { refs } from './js/refs';
 
 const debounce = require('lodash.debounce');
 const basicApi = new BasicApi();
-console.log(basicApi);
+
+basicApi.resetPage();
+forClearForm();
 
 refs.onSearchForm.addEventListener ('submit', funcForSeach);
 refs.onLoadButton.addEventListener ('click', () => {
-    refs.onLoadButton.scrollIntoView({
+    refs.onContainerTmamlate.scrollIntoView({
         behavior: 'smooth',
         block: 'end',
       });
 basicApi.fetchImg().then(appenArticleMarkup);
+});
+refs.onContainerTmamlate.addEventListener('click', (e) => {
+if (e.target.nodeName === 'IMG') {
+    const instance = basicLightbox
+    .create(`<img src="${e.target.dataset.source}">`);
+    instance.show();
+}
 })
 
-basicApi.resetPage();
-forClearForm();
 
 function funcForSeach(event) {
 event.preventDefault();

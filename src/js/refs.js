@@ -3,5 +3,6 @@ export const refs = {
     onContainerTmamlate: document.querySelector('.gallery'),
     onFindButton: document.querySelector('.btn-primary'),
     onLoadButton: document.querySelector('.button'),
-    onInputClear: document.querySelector('input')
+    onInputClear: document.querySelector('input'),
+    onModalImg: document.querySelector('.photo-card')
 }
