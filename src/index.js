@@ -16,11 +16,14 @@ forClearForm();
 
 refs.onSearchForm.addEventListener ('submit', funcForSeach);
 refs.onLoadButton.addEventListener ('click', () => {
+    basicApi.fetchImg().then(articles => {
+        appenArticleMarkup(articles);
+
     refs.onContainerTmamlate.scrollIntoView({
         behavior: 'smooth',
         block: 'end',
       });
-basicApi.fetchImg().then(appenArticleMarkup);
+    });
 });
 refs.onContainerTmamlate.addEventListener('click', (e) => {
 if (e.target.nodeName === 'IMG') {
