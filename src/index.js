@@ -28,7 +28,7 @@ if (e.target.nodeName === 'IMG') {
     .create(`<img src="${e.target.dataset.source}">`);
     instance.show();
 }
-})
+});
 
 
 function funcForSeach(event) {
