@@ -1,38 +1,37 @@
-// export default class BasicApi {
-//   constructor() {
-//     this.query = 'car';
-//     this.page = 1;
-//   }
-
-//   fetchArticles() {
-//  const BASE_URL = `https://pixabay.com/api/?key=24211892-65b24d547a4d8d8d87b5227cd&image_type=photo&orientation=horizontal&q=${this.query}&${this.page}&per_page=12`;
-
-//     return fetch(BASE_URL)
-//       .then(responce => responce.json())
-//       .then(console.log)
-//       .catch(err => console.log(err));
-//   }
+// export function basicApi() {
+//     const axios = require('axios');
+// axios.get(`https://pixabay.com/api/?key=24211892-65b24d547a4d8d8d87b5227cd&image_type=photo&orientation=horizontal&q=car&page=1&per_page=12`)
+//   .then(function (response) {
+//    responce.json()
+//     .then(console.log);
+//   })
 // }
-// // fetch(`https://pixabay.com/api/?key=24211892-65b24d547a4d8d8d87b5227cd&image_type=photo&orientation=horizontal&q=car&page=1&per_page=12`)
-// // .then(r=>r.json())
+
+// =================================================================
 export default class BasicApi {
     constructor() {
-        this.searchQuery = 'car';
+        this.searchQuery = '';
         this.page = 1;
     }
-        fetchArticles() {
-            console.log("до запроса:", this);
-        
-            const url = `https://pixabay.com/api/?key=24211892-65b24d547a4d8d8d87b5227cd&image_type=photo&orientation=horizontal&q=car&page=1&per_page=12`
+        async fetchImg() {
             
-            return fetch(url)
-            .then(responces => responces.json())
-            .then(data => {
+            const key = '24211892-65b24d547a4d8d8d87b5227cd';
+            const url = 'https://pixabay.com/api/';
+           
+             const responce = await fetch(`${url}/?key=${key}&image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12`);
+            const respObj = await responce.json().then(({hits}) => {
                 this.incrementPage();
-                console.log(data);
-                console.log("после запроса:",this);
-                return data.articles
-            }) 
+                return hits;
+            })
+            
+            return respObj;
+            
+            // .then(data => {
+            //     this.incrementPage();
+            //     console.log('data:', data);
+            //     console.log("после запроса:",this);
+            //     return data.hits
+            // }) 
         }
         get query() {
             return this.searchQuery;
